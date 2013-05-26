@@ -25,7 +25,7 @@ def negamax(start_node, max_depth=99, heuristic=nval):
 
         for child in node.children:
             val = -negamax_ab(child, depth-1, -beta, -alpha, -color)
-            node.value = val
+            node.value = val    # helpful for the printout
 
             if val >= beta: 
                 return val

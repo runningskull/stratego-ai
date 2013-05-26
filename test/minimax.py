@@ -15,6 +15,7 @@ TREE = \
   ((-7, -5,),),),)
 
 
+# from http://en.wikipedia.org/wiki/File:Negamax_AlphaBeta.gif
 TREE2 = \
 ((((5, 6),
    (7, 4, 5),),
@@ -39,22 +40,9 @@ def _make_tree(tup):
 
     return mknode(tup, 1)
 
-def pad(s, l=4):
-    return str(s) + (' ' * (l - len(str(s))))
-
-
-
-def print_node(node, depth):
-    char = '-' if depth % 2 else '+'
-    print ((char + '   ') * depth) + pad(str(node.value or ''))
-
-    for _node in node.children:
-        print_node(_node, depth+1)
-
 
 def test_negamax():
     root_node = _make_tree(TREE2)
-    #print_node(root_node, 0)
     print asciitree.draw_tree(root_node)
 
     print "\nHit enter to run algo"
