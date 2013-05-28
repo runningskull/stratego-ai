@@ -42,13 +42,15 @@ def _make_tree(tup):
 
 
 def test_negamax():
-    root_node = _make_tree(TREE2)
+    root_node = _make_tree(TREE)
+    #root_node = _make_tree(TREE2)
     print asciitree.draw_tree(root_node)
 
     print "\nHit enter to run algo"
     raw_input()
 
-    print ("NEGAMAX", minimax.negamax(root_node))
+    #print ("NEGAMAX", minimax.negamax(root_node))
+    print ("NEGAMAX", minimax.dumb_negamax(root_node, 99))
     print asciitree.draw_tree(root_node)
     assert 1 == 2
 

@@ -21,11 +21,12 @@ def nval(node):
 def negamax(start_node, max_depth=99, heuristic=nval):
     def negamax_ab(node, depth, alpha, beta, color):
         if depth <= 0 or node.terminal():
-            return color * (node.value or heuristic(node, start_node.player))
+            #return node.value or heuristic(node, start_node.player)
+            return color * (node.value or heuristic(node, start_ode.player))
 
         for child in node.children:
             val = -negamax_ab(child, depth-1, -beta, -alpha, -color)
-            node.value = val    # helpful for the printout
+            node.value = abs(val)    # helpful for the printout
 
             if val >= beta: 
                 return val
@@ -35,4 +36,21 @@ def negamax(start_node, max_depth=99, heuristic=nval):
         return alpha
 
     return negamax_ab(start_node, max_depth, -INF, INF, 1)
+
+
+def dumb_negamax(node, depth, alpha=-INF, beta=INF):
+    if node.terminal() or (depth <= 0):
+        return nval(node)
+
+    record = -INF
+
+    for child in node.children:
+        score = -dumb_negamax(child, depth - 1)
+        child.value = abs(score) # for printing
+
+        if score > record:
+            record = score
+
+    node.value = record
+    return record
 
